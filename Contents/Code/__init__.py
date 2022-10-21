@@ -18,14 +18,16 @@ CREDITS:
     Subtitle support and some fixes: glitch452
 """
 
-from datetime import datetime
 import os
 import re
 import sys
-from dateutil.parser import parse
 import traceback
 import urllib
+from datetime import datetime
+
 import urlparse
+from dateutil.parser import parse
+
 import subtitles
 
 if sys.version_info < (3, 0):
@@ -690,7 +692,7 @@ class XBMCNFO(PlexAgent):
                     sets_list = nfo_reader.read_sets_name()
                     for setname in sets_list:
                         setname = setname_pat.sub('', setname.strip())
-                        if setname: # skip empty name
+                        if setname and preferences['collectionsfromsets']: # skip empty name
                             log.debug('Set name found: ' + setname)
                             metadata.collections.add(setname)
                             log.debug('Added Collection: {}'.format(setname))
